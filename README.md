@@ -49,4 +49,4 @@ func main() {
 MIT License, check the License file for full details.
 
 ## Support
-Feel free to make suggestions or provide feedback regarding the code. Please note that this is an unofficial library, so any questions you may have about the API itself must be directed to the great people behind News API. Thanks.
+Feel free to make suggestions or provide feedback regarding the code. Please note that this is an unofficial library, so any questions you may have about the API itself must be directed to the developers of NewsAPI.org.
