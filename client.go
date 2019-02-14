@@ -1,6 +1,8 @@
 package newsapi
 
 import (
+	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"time"
@@ -25,7 +27,7 @@ type jsonPayload struct {
 	page			string
 }
 
-func (c Client) GetTopHeadlines(query string, sources string, language string, country string, category string, pageSize int, page int) []byte {
+func (c Client) GetTopHeadlines(query string, sources string, language string, country string, category string, pageSize int, page int) []Article {
 
 	var payload jsonPayload
 
@@ -89,10 +91,17 @@ func (c Client) GetTopHeadlines(query string, sources string, language string, c
 		log.Fatal("Could not read the response")
 	}
 
-	return body
+	var data articlesResponse
+
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		fmt.Println("error unmarshalling")
+	}
+
+	return data.Articles
 }
 
-func (c Client) GetEverything(query string, sources string, domains string, excludeDomains string, from string, to string, language string, sortBy string, pageSize int, page int) []byte{
+func (c Client) GetEverything(query string, sources string, domains string, excludeDomains string, from string, to string, language string, sortBy string, pageSize int, page int) []Article{
 
 	var payload jsonPayload
 
@@ -131,6 +140,7 @@ func (c Client) GetEverything(query string, sources string, domains string, excl
 					payload.from = from
 					break
 				}
+
 			}
 		} else {
 			log.Fatal("from param should be in the format YYYY-MM-DD or YYYY-MM-DDThh:mm:ss")
@@ -167,9 +177,9 @@ func (c Client) GetEverything(query string, sources string, domains string, excl
 			}
 		}
 
-		toTime, err = time.Parse(layoutWithoutTime, from)
+		toTime, err = time.Parse(layoutWithoutTime, to)
 		if err != nil {
-			toTime, err = time.Parse(layoutWithTime, from)
+			toTime, err = time.Parse(layoutWithTime, to)
 			if err != nil {
 				log.Fatal("to param should be in the format YYYY-MM-DD or YYYY-MM-DDThh:mm:ss")
 			}
@@ -209,10 +219,17 @@ func (c Client) GetEverything(query string, sources string, domains string, excl
 		log.Fatal("Could not read the response")
 	}
 
-	return body
+	var data articlesResponse
+
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		fmt.Println("error unmarshalling")
+	}
+
+	return data.Articles
 }
 
-func (c Client) GetSources(category string, language string, country string) []byte{
+func (c Client) GetSources(category string, language string, country string) []Source {
 	var payload jsonPayload
 
 	if language != "" {
@@ -246,5 +263,11 @@ func (c Client) GetSources(category string, language string, country string) []b
 		log.Fatal("Could not read the response")
 	}
 
-	return body
+	var data sourcesResponse
+
+	err = json.Unmarshal(body, &data)
+	if err != nil {
+		fmt.Println("error unmarshalling")
+	}
+	return data.Sources
 }
