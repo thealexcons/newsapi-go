@@ -26,18 +26,18 @@ Here is an example program using the [Top Headlines endpoint](https://newsapi.or
 package main
 
 import (
-    "github.com/thealexcons/newsapi-go"
-    "fmt"
+    	"github.com/thealexcons/newsapi-go"
+   	"fmt"
 )
 
 func main() {
     
-    client := newsapi.Client{ ApiKey: "XXXXXXXXXXXXXXXX" }  // your API key goes here
-    
-    articles := client.GetTopHeadlines("man city", "", "en", "", "sports", 5, 1)
-    
-    for i := 0; i < len(articles); i++ {
-		fmt.Println(articles[i].Title)              // prints the article name
+	client := newsapi.Client{ ApiKey: "XXXXXXXXXXXXXXXX" }  // your API key goes here
+
+	articles := client.GetTopHeadlines("man city", "", "en", "", "sports", 5, 1)
+
+	for i := 0; i < len(articles); i++ {
+		fmt.Println(articles[i].Title)              	// prints the article name
 		fmt.Println(articles[i].Source.Name)               // prints the source name
 		fmt.Println("Read more at " + articles[i].URL)     // prints the article url
 	}
