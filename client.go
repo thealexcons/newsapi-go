@@ -13,13 +13,13 @@ type Client struct {
 }
 
 type jsonPayload struct {
-	q 				string
+	q 			string
 	sources			string
 	language 		string
 	domains			string
-	excludeDomains 	string
+	excludeDomains 		string
 	from			string
-	to				string
+	to			string
 	sortBy			string
 	country			string
 	category		string
@@ -95,7 +95,7 @@ func (c Client) GetTopHeadlines(query string, sources string, language string, c
 
 	err = json.Unmarshal(body, &data)
 	if err != nil {
-		fmt.Println("error unmarshalling")
+		fmt.Println("error unmarshalling json")
 	}
 
 	return data.Articles
@@ -223,7 +223,7 @@ func (c Client) GetEverything(query string, sources string, domains string, excl
 
 	err = json.Unmarshal(body, &data)
 	if err != nil {
-		fmt.Println("error unmarshalling")
+		fmt.Println("error unmarshalling json")
 	}
 
 	return data.Articles
@@ -267,7 +267,7 @@ func (c Client) GetSources(category string, language string, country string) []S
 
 	err = json.Unmarshal(body, &data)
 	if err != nil {
-		fmt.Println("error unmarshalling")
+		fmt.Println("error unmarshalling json")
 	}
 	return data.Sources
 }
