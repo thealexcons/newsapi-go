@@ -19,6 +19,7 @@ GetEverything(query string, sources string, domains string, excludeDomains strin
 
 GetSources(category string, language string, country string) []Source
 ```
+You can look in the `const.go` file to see what country and language codes are available, the categories and the sorting methods.
 
 ## Example Usage
 Here is an example program using the [Top Headlines endpoint](https://newsapi.org/docs/endpoints/top-headlines):
