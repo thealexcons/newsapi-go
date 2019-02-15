@@ -37,7 +37,7 @@ func main() {
 	articles := client.GetTopHeadlines("man city", "", "en", "gb", "sports", 5, 1)
 
 	for i := 0; i < len(articles); i++ {
-		fmt.Println(articles[i].Title)              	// prints the article name
+		fmt.Println(articles[i].Title)              	   // prints the article name
 		fmt.Println(articles[i].Source.Name)               // prints the source name
 		fmt.Println("Read more at " + articles[i].URL)     // prints the article url
 	}
